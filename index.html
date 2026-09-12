@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adem Ferrah — Network Administration &amp; Security</title>
+<meta name="description" content="Adem Ferrah — Information Network Administration and Security. Networks designed, deployed and defended. AI-assisted, human-reviewed.">
+<link rel="icon" href="assets/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="styles.css">
+<style>
+/* critical inline: the intro paints with the very first byte of HTML — no stylesheet wait */
+body{background:#0a0e20}
+.intro{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(168deg,#0a0e20,#10142a 55%,#0b0f22);
+  animation:introOut .55s ease 3.05s both}
+.intro__svg{width:clamp(150px,22vw,216px);aspect-ratio:1;animation:introSoft .6s ease both}
+.intro__svg .dw{fill:none;stroke:#918cff;stroke-width:7;stroke-linejoin:miter;
+  stroke-dasharray:100;stroke-dashoffset:100;animation:drawStroke .7s cubic-bezier(.4,0,.3,1) both}
+@keyframes introSoft{from{opacity:0}to{opacity:1}}
+@keyframes drawStroke{to{stroke-dashoffset:0}}
+@keyframes introOut{to{opacity:0;visibility:hidden;pointer-events:none}}
+</style>
+<link rel="stylesheet" media="print" onload="this.media='all';this.onload=null"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap"></noscript>
+</head>
+<body>
+
+<!-- ══ intro veil (plays once per session, skippable, see script.js) ══ -->
+<div id="intro" class="intro" aria-hidden="true">
+  <svg class="intro__svg" viewBox="-14 -14 556 556" aria-hidden="true"><g fill="none" stroke="#918cff" stroke-width="7" stroke-linejoin="miter"><path class="dw" pathLength="100" style="animation-delay:0.45s" d="M20 19L19 510L509 509L510 21Z"/><path class="dw" pathLength="100" style="animation-delay:0.50s" d="M48 44L258 46L257 483L44 482L44 225L156 218L153 127L144 216L44 214Z"/><path class="dw" pathLength="100" style="animation-delay:0.55s" d="M477 44L482 304L381 304L373 128L371 309L480 314L482 392L375 395L369 483L272 484L268 47Z"/><path class="dw" pathLength="100" style="animation-delay:0.60s" d="M150 306L147 309L147 399L150 402L153 402L156 398L156 310L154 306Z"/></g></svg>
+</div>
+<!-- fixed background artwork + scrim -->
+<div class="bg" aria-hidden="true"></div>
+<div class="progress" id="progress" aria-hidden="true"></div>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ══════════════════ NAV ══════════════════ -->
+<header class="nav" id="nav">
+  <div class="nav__inner">
+    <a href="#top" class="nav__brand" aria-label="Adem Ferrah — home">
+      <img class="nav__af" src="assets/logo-af.png" alt="" width="528" height="528" decoding="async" fetchpriority="low">
+    </a>
+    <nav class="nav__links" aria-label="Sections">
+      <a href="#about"><i>01</i>About</a>
+      <a href="#focus"><i>02</i>Focus</a>
+      <a href="#experience"><i>03</i>Experience</a>
+      <a href="#services"><i>04</i>Services</a>
+      <a href="#innovation"><i>05</i>AI</a>
+      <a href="#project"><i>06</i>Project</a>
+      <a href="#contact"><i>07</i>Contact</a>
+    </nav>
+    <a href="#contact" class="nav__cta">New message</a>
+  </div>
+</header>
+
+<!-- ══════════════════ HERO ══════════════════ -->
+<section class="hero" id="top">
+  <div class="hero__frame">
+    <div class="hero__rail hero__rail--top">
+      <span>El Moattassam Billah Adem</span>
+      <span class="hero__dash">Network Administration &amp; Security</span>
+      <span>Algeria</span>
+    </div>
+
+    <div class="hero__grid">
+      <div class="hero__main">
+        <p class="hero__welcome">Welcome, I am</p>
+        <h1 class="hero__name">
+          <span>Adem</span>
+          <span>Ferrah</span>
+        </h1>
+        <p class="hero__role">Information Network<br>Administration <b>&amp;</b> Security</p>
+        <p class="hero__lede">
+          I design, deploy and defend the infrastructure that small businesses,
+          offices and institutions run on — structured LANs, segmented VLANs,
+          hardened firewalls, controlled access, monitored traffic.
+        </p>
+      </div>
+
+      <aside class="hero__index" aria-label="Social profiles">
+        <div class="hero__brandlock" aria-hidden="true"><img src="assets/logo-af.png" alt="" width="528" height="528" decoding="async"></div>
+        <p class="hero__index-title hero__social-title">Elsewhere</p>
+        <ul class="hero__social">
+          <li><a href="https://www.instagram.com/adamferrah__/" target="_blank" rel="noopener noreferrer"><svg class="s-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></svg><span>Instagram</span><em aria-hidden="true">↗</em></a></li>
+          <li><a href="https://github.com/adamfarrah" target="_blank" rel="noopener noreferrer"><svg class="s-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg><span>GitHub</span><em aria-hidden="true">↗</em></a></li>
+          <li><a href="https://discord.com/invite/vdNBs5qt" target="_blank" rel="noopener noreferrer"><svg class="s-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg><span>Discord</span><em aria-hidden="true">↗</em></a></li>
+          <li><a href="https://steamcommunity.com/profiles/76561199563584254/" target="_blank" rel="noopener noreferrer"><svg class="s-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.006l2.861-4.142V8.91c0-2.495 2.028-4.524 4.524-4.524 2.494 0 4.524 2.031 4.524 4.527s-2.03 4.525-4.524 4.525h-.105l-4.076 2.911c0 .052.004.105.004.159 0 1.875-1.515 3.396-3.39 3.396-1.635 0-3.016-1.173-3.331-2.727L.436 15.27C1.862 20.307 6.486 24 11.979 24c6.627 0 11.999-5.373 11.999-12S18.605 0 11.979 0zM7.54 18.21l-1.473-.61c.262.543.714.999 1.314 1.25 1.297.539 2.793-.076 3.332-1.375.263-.63.264-1.319.005-1.949s-.75-1.121-1.377-1.383c-.624-.26-1.29-.249-1.878-.03l1.523.63c.956.4 1.409 1.5 1.009 2.455-.397.957-1.497 1.41-2.454 1.012H7.54zm11.415-9.303c0-1.662-1.353-3.015-3.015-3.015-1.665 0-3.015 1.353-3.015 3.015 0 1.665 1.35 3.015 3.015 3.015 1.663 0 3.015-1.35 3.015-3.015zm-5.273-.005c0-1.252 1.013-2.266 2.265-2.266 1.249 0 2.266 1.014 2.266 2.266 0 1.251-1.017 2.265-2.266 2.265-1.253 0-2.265-1.014-2.265-2.265z"/></svg><span>Steam</span><em aria-hidden="true">↗</em></a></li>
+        </ul>
+              </aside>
+    </div>
+
+    <div class="hero__rail hero__rail--bottom">
+      <a href="#about" class="hero__scroll">Scroll <span aria-hidden="true">↓</span></a>
+      <span>Est. practice — built clean · documented clearly · secured by default</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ TICKER ══════════════════ -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker__track">
+    <span>Network Security <b>◆</b></span><span>VLAN Segmentation <b>◆</b></span><span>Firewall Hardening <b>◆</b></span><span>System Administration <b>◆</b></span><span>AI Integration <b>◆</b></span><span>Secure Design <b>◆</b></span><span>IT Support <b>◆</b></span><span>Web Design <b>◆</b></span><span>Human Touch <b>◆</b></span>
+    <span>Network Security <b>◆</b></span><span>VLAN Segmentation <b>◆</b></span><span>Firewall Hardening <b>◆</b></span><span>System Administration <b>◆</b></span><span>AI Integration <b>◆</b></span><span>Secure Design <b>◆</b></span><span>IT Support <b>◆</b></span><span>Web Design <b>◆</b></span><span>Human Touch <b>◆</b></span>
+  </div>
+</div>
+
+<main id="main" class="paper">
+
+  <!-- ══════════════════ 01 ABOUT ══════════════════ -->
+  <section class="sec" id="about">
+    <div class="container">
+      <div class="sechead" data-reveal>
+        <span class="sechead__num">01</span>
+        <span class="sechead__name">About</span>
+        <span class="sechead__rule" aria-hidden="true"></span>
+      </div>
+
+      <h2 class="display" data-reveal>Networks that stay&nbsp;up.<br>Data that stays <span class="accentword">private.</span></h2>
+
+      <div class="about__grid">
+        <div class="about__prose" data-reveal>
+          <p>
+            I'm <b>El Moattassam Billah Adem Ferrah</b> — a specialist in
+            <b>Information Network Administration and Security</b>, holding a
+            university degree in the field. I design, deploy and defend the
+            infrastructure that small businesses, offices and institutions run
+            on: structured LANs, segmented VLANs, hardened firewalls,
+            controlled access and monitored traffic.
+          </p>
+          <p>
+            My approach is simple: <b>build it clean, document it clearly,
+            secure it by default.</b> A network should be invisible when it
+            works — and understandable when it doesn't. I pair solid
+            fundamentals in routing, switching and defense-in-depth with
+            modern <b>AI-assisted tooling</b> that speeds up diagnostics and
+            hardening, while every decision still passes through human
+            judgment.
+          </p>
+        </div>
+        <ul class="about__principles" data-reveal>
+          <li><i>—</i>Invisible when it works</li>
+          <li><i>—</i>Understandable when it doesn't</li>
+          <li><i>—</i>Documented at handover</li>
+          <li><i>—</i>Secured by default</li>
+        </ul>
+      </div>
+
+      <div class="stats" data-reveal>
+        <div class="stat"><b>24/7</b><span>Uptime mindset</span></div>
+        <div class="stat"><b>7+</b><span>Layers secured</span></div>
+        <div class="stat"><b>AI</b><span>Assisted workflow</span></div>
+        <div class="stat"><b>100%</b><span>Human reviewed</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════ 02 TECHNICAL FOCUS ══════════════════ -->
+  <section class="sec" id="focus">
+    <div class="container">
+      <div class="sechead" data-reveal>
+        <span class="sechead__num">02</span>
+        <span class="sechead__name">Technical Focus</span>
+        <span class="sechead__rule" aria-hidden="true"></span>
+      </div>
+      <div class="sec-intro" data-reveal>
+        <h2 class="display display--sm">What I work on</h2>
+        <p class="sec-intro__note">The core disciplines behind every deployment I deliver.</p>
+      </div>
+
+      <div class="cards" data-reveal>
+        <article class="card" style="--i:0"><span class="card__num">01</span>
+          <h3>Network Infrastructure</h3>
+          <p>LAN/WAN design, structured cabling logic, switching, routing, VLAN segmentation, subnetting and IP addressing plans built to scale.</p>
+        </article>
+        <article class="card" style="--i:1"><span class="card__num">02</span>
+          <h3>Security &amp; Hardening</h3>
+          <p>Firewall policy, ACLs, port security, NAT, VPN tunnels, WPA2/3 enterprise wireless, password and privilege management, patch discipline.</p>
+        </article>
+        <article class="card" style="--i:2"><span class="card__num">03</span>
+          <h3>System Administration</h3>
+          <p>Windows &amp; Linux server roles, Active Directory, DHCP/DNS, file and print services, user provisioning, GPO and access control.</p>
+        </article>
+        <article class="card" style="--i:3"><span class="card__num">04</span>
+          <h3>Monitoring &amp; Diagnostics</h3>
+          <p>Traffic analysis with Wireshark and Zabbix, packet-level troubleshooting, SNMP and Syslog review, latency and bottleneck hunting.</p>
+        </article>
+        <article class="card" style="--i:4"><span class="card__num">05</span>
+          <h3>Simulation &amp; Labs</h3>
+          <p>Full topology prototyping in Cisco Packet Tracer and GNS3, virtualized test benches, configuration validation before production.</p>
+        </article>
+        <article class="card" style="--i:5"><span class="card__num">06</span>
+          <h3>Backup &amp; Continuity</h3>
+          <p>Backup strategies, redundancy and failover paths, recovery procedures, and disaster-recovery planning that's actually been tested.</p>
+        </article>
+        <article class="card card--wide" style="--i:6"><span class="card__num">07</span>
+          <h3>Web Design &amp; Development</h3>
+          <p>Commercial websites built from scratch: responsive layouts, clean lightweight code, performance tuning, hosting setup and full handover.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════ 03 EXPERIENCE ══════════════════ -->
+  <section class="sec" id="experience">
+    <div class="container">
+      <div class="sechead" data-reveal>
+        <span class="sechead__num">03</span>
+        <span class="sechead__name">Experience</span>
+        <span class="sechead__rule" aria-hidden="true"></span>
+      </div>
+      <div class="sec-intro" data-reveal>
+        <h2 class="display display--sm">Where I've worked</h2>
+        <p class="sec-intro__note">Field engineering, operational responsibility and commercial web work — beyond the lab.</p>
+      </div>
+
+      <div class="exp" data-reveal>
+        <article class="exp__row">
+          <header class="exp__head">
+            <span class="exp__num">E/01</span>
+            <h3>Web Design &amp; Development</h3>
+            <p class="exp__org">Freelance<br><b>· Ongoing</b></p>
+          </header>
+          <div class="exp__body">
+            <p class="exp__desc">Designing and building websites of all kinds — commercial, personal and institutional — from concept to deployment.</p>
+            <ul class="exp__list">
+              <li>Business sites, landing pages, portfolios, storefronts and personal pages</li>
+              <li>Responsive layouts that work cleanly on desktop, tablet and mobile</li>
+              <li>Performance-first builds — fast loading, lightweight, and search-engine friendly</li>
+              <li>Full delivery: design, development, hosting setup and handover</li>
+            </ul>
+            <ul class="tags">
+              <li>HTML / CSS</li><li>JavaScript</li><li>Responsive Design</li><li>UI / UX</li><li>Performance</li><li>Deployment</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="exp__row">
+          <header class="exp__head">
+            <span class="exp__num">E/02</span>
+            <h3>Field Test Engineer — CTE</h3>
+            <p class="exp__org">Algérie Télécom — CTE Department<br><b>· 6 months</b></p>
+          </header>
+          <div class="exp__body">
+            <p class="exp__desc">CTE department (Centre de Transmission / Technical Operations) — on-site testing and validation of telecom infrastructure.</p>
+            <ul class="exp__list">
+              <li>Field testing of network lines and subscriber connections across live sites</li>
+              <li>Fault diagnosis, signal quality measurement and connectivity verification</li>
+              <li>Documenting test results and reporting anomalies to technical teams</li>
+              <li>Working inside the CTE unit of the regional Algérie Télécom directorate</li>
+              <li>Hands-on exposure to real operator-grade infrastructure and procedures</li>
+            </ul>
+            <ul class="tags">
+              <li>CTE</li><li>Field Testing</li><li>Fault Diagnosis</li><li>Telecom Lines</li><li>Reporting</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="exp__row">
+          <header class="exp__head">
+            <span class="exp__num">E/03</span>
+            <h3>Storage &amp; Inventory Manager</h3>
+            <p class="exp__org">Ardis — Auchan Group<br><b>· Largest mall in the country</b></p>
+          </header>
+          <div class="exp__body">
+            <p class="exp__desc">Responsible for warehouse operations at a high-volume retail site.</p>
+            <ul class="exp__list">
+              <li>Managing stock intake, storage organisation and outbound flow at scale</li>
+              <li>Inventory accuracy, stock-level tracking and discrepancy resolution</li>
+              <li>Coordinating with suppliers and internal departments under daily pressure</li>
+              <li>Applying structure and traceability — the same discipline I bring to networks</li>
+            </ul>
+            <ul class="tags">
+              <li>Inventory Control</li><li>Logistics</li><li>Team Coordination</li><li>Process Discipline</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════ 04 SERVICES ══════════════════ -->
+  <section class="sec" id="services">
+    <div class="container">
+      <div class="sechead" data-reveal>
+        <span class="sechead__num">04</span>
+        <span class="sechead__name">Services</span>
+        <span class="sechead__rule" aria-hidden="true"></span>
+      </div>
+      <div class="sec-intro" data-reveal>
+        <h2 class="display display--sm">IT services I offer</h2>
+        <p class="sec-intro__note">Practical, end-to-end support — from the first cable to the last audit line.</p>
+      </div>
+
+      <ol class="svc" data-reveal>
+        <li class="svc__row"><span class="svc__num">Service 01</span>
+          <h3>Network Setup &amp; Configuration</h3>
+          <p>Complete build-out for offices, labs, shops and homes: router and switch configuration, VLANs, Wi-Fi coverage, guest isolation, and clean IP planning with full documentation handed over.</p>
+          <span class="svc__arrow" aria-hidden="true">→</span>
+        </li>
+        <li class="svc__row"><span class="svc__num">Service 02</span>
+          <h3>Security Audit &amp; Hardening</h3>
+          <p>Assessment of your current setup, exposure review, firewall and access-control tuning, credential hygiene, and a prioritized remediation report written in plain language.</p>
+          <span class="svc__arrow" aria-hidden="true">→</span>
+        </li>
+        <li class="svc__row"><span class="svc__num">Service 03</span>
+          <h3>Server &amp; User Management</h3>
+          <p>Domain controllers, Active Directory, shared storage, permissions matrices, DHCP/DNS services, and onboarding/offboarding procedures that don't leave doors open.</p>
+          <span class="svc__arrow" aria-hidden="true">→</span>
+        </li>
+        <li class="svc__row"><span class="svc__num">Service 04</span>
+          <h3>Troubleshooting &amp; Maintenance</h3>
+          <p>Fast diagnosis of connectivity, performance and configuration failures, plus scheduled maintenance, updates and health checks to stop problems before they start.</p>
+          <span class="svc__arrow" aria-hidden="true">→</span>
+        </li>
+        <li class="svc__row"><span class="svc__num">Service 05</span>
+          <h3>Backup &amp; Recovery Planning</h3>
+          <p>Designing what gets backed up, how often, where it lives, and how quickly it comes back. Includes restore drills, because an untested backup isn't a backup.</p>
+          <span class="svc__arrow" aria-hidden="true">→</span>
+        </li>
+        <li class="svc__row"><span class="svc__num">Service 06</span>
+          <h3>Technical Consulting &amp; Training</h3>
+          <p>Equipment selection, upgrade roadmaps, cost-aware architecture advice, and hands-on training so your team can operate the system with confidence.</p>
+          <span class="svc__arrow" aria-hidden="true">→</span>
+        </li>
+        <li class="svc__row"><span class="svc__num">Service 07</span>
+          <h3>Business Website Creation</h3>
+          <p>Design and build of commercial sites for shops, offices and professionals — responsive, fast, SEO-aware, deployed and handed over ready to use.</p>
+          <span class="svc__arrow" aria-hidden="true">→</span>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ══════════════════ 05 INNOVATION (dark band) ══════════════════ -->
+  <section class="sec sec--dark" id="innovation">
+    <div class="container">
+      <div class="sehead sehead--dark" data-reveal>
+        <span class="sechead__num">05</span>
+        <span class="sechead__name">Innovation</span>
+        <span class="sechead__rule" aria-hidden="true"></span>
+      </div>
+      <h2 class="display display--dark" data-reveal>AI in the workflow.<br>Judgment stays <span class="redword">human.</span></h2>
+      <p class="dark-lede" data-reveal>
+        Technology moves fast, and standing still is its own kind of vulnerability.
+        I integrate <b>artificial intelligence</b> into my daily work to move faster
+        and see more — while keeping the responsibility, the ethics and the final
+        call firmly in human hands.
+      </p>
+
+      <div class="aicards" data-reveal>
+        <article class="aicard"><span class="aicard__num">AI 01</span>
+          <h3>Faster Diagnostics</h3>
+          <p>AI-assisted log and packet analysis surfaces patterns and anomalies in minutes instead of hours — then I verify every finding manually before acting.</p>
+        </article>
+        <article class="aicard"><span class="aicard__num">AI 02</span>
+          <h3>Configuration Review</h3>
+          <p>Automated cross-checking of firewall rules, ACLs and device configs against best practice, catching misconfigurations before they reach production.</p>
+        </article>
+        <article class="aicard"><span class="aicard__num">AI 03</span>
+          <h3>Threat Awareness</h3>
+          <p>Continuous tracking of emerging vulnerabilities and attack techniques, summarized and mapped to what actually matters for your specific environment.</p>
+        </article>
+        <article class="aicard"><span class="aicard__num">AI 04</span>
+          <h3>Documentation &amp; Reporting</h3>
+          <p>Clear, structured handover documents and audit reports produced quickly — reviewed, corrected and signed off by me, never shipped raw.</p>
+        </article>
+        <article class="aicard"><span class="aicard__num">AI 05</span>
+          <h3>Automation</h3>
+          <p>Scripted routine tasks — inventory, health checks, backup verification — so human attention goes where it's genuinely needed.</p>
+        </article>
+        <article class="aicard aicard--accent"><span class="aicard__num">AI 06</span>
+          <h3>The Human Touch</h3>
+          <p>AI advises; it doesn't decide. Every recommendation passes through context, experience and accountability before it reaches your network.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════ 06 GRADUATION PROJECT ══════════════════ -->
+  <section class="sec" id="project">
+    <div class="container">
+      <div class="sechead" data-reveal>
+        <span class="sechead__num">06</span>
+        <span class="sechead__name">Graduation Project</span>
+        <span class="sechead__rule" aria-hidden="true"></span>
+      </div>
+      <h2 class="display" data-reveal>Designing &amp; securing<br>an enterprise network</h2>
+
+      <div class="proj__meta" data-reveal>
+        <span class="badge badge--ok">Completed</span>
+        <span class="badge">Graduation Project</span>
+        <span class="badge">GNS3 · pfSense · Zabbix</span>
+        <p class="proj__grade"><b>16</b><span>_/ 20_</span> <em>Final grade</em></p>
+      </div>
+
+      <div class="proj__intro" data-reveal>
+        <h3>Practical Guide: Designing and Securing an Enterprise Network</h3>
+        <p>
+          A complete, field-tested methodology for designing, securing and
+          supervising a Local Area Network for an organization — from the first
+          technical audit all the way to penetration testing and verification.
+          Built on a real enterprise deployment using industry-standard tools
+          (Cisco, pfSense, Zabbix) and fully simulated in GNS3, then generalized
+          so it applies to any organization: a small company, an educational
+          institution, or a local data center.
+        </p>
+        <p>
+          Work began with a full audit of the existing network — hardware
+          inventory, traffic flows, logical architecture and a risk matrix
+          combining likelihood and impact — which fed a requirements document
+          tying every proposed control back to the CIA triad. From there: a
+          hierarchical collapsed-core design, six departmental VLANs with a
+          structured addressing plan, a pfSense firewall enforcing least
+          privilege, defense in depth at Layers 2 and 3, real-time supervision,
+          and finally validation through simulated attacks.
+        </p>
+      </div>
+
+      <div class="proj__cols" data-reveal>
+        <ul class="meas">
+          <li><b>Diagnosis</b><span>Hardware inventory, risk matrix, requirements document</span></li>
+          <li><b>Architecture</b><span>Collapsed-core (Core L3 + Access L2), scalable by design</span></li>
+          <li><b>Segmentation</b><span>6 VLANs (802.1Q), VLSM addressing, dedicated management VLAN 99</span></li>
+          <li><b>Stability</b><span>Rapid-PVST+ with sub-two-second convergence on link failure</span></li>
+        </ul>
+        <ul class="meas">
+          <li><b>Perimeter</b><span>pfSense sub-interfaces, per-VLAN DHCP, NAT, default-deny rules</span></li>
+          <li><b>Defense in depth</b><span>Extended ACLs, Port Security, DHCP Snooping, Dynamic ARP Inspection</span></li>
+          <li><b>Access</b><span>802.1X/RADIUS with AAA, IPSec site-to-site and OpenVPN SSL (AES-256-GCM)</span></li>
+          <li><b>Supervision</b><span>Zabbix on isolated VLAN 50, SNMP + Syslog, triggers and dashboards</span></li>
+        </ul>
+      </div>
+
+      <!-- network diagram -->
+      <figure class="diagram" data-reveal>
+        <figcaption class="diagram__cap"><span>Fig. 06.1</span> Reference topology — untrusted to trusted, default-deny at every boundary</figcaption>
+        <svg viewBox="0 0 1080 470" role="img" aria-label="Network diagram: Internet through a pfSense firewall to a core switch, then to two access switches and a server zone, with RADIUS authentication and SNMP/Syslog supervision">
+          <defs>
+            <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 z" fill="#eef1fb"/>
+            </marker>
+            <marker id="arrR" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 z" fill="#918cff"/>
+            </marker>
+          </defs>
+          <rect width="1080" height="470" fill="#0d1126"/>
+          <!-- zone labels (own gutter, x < 118) -->
+          <text x="16" y="70" class="svz">UNTRUSTED</text>
+          <text x="16" y="150" class="svz">PERIMETER</text>
+          <text x="16" y="242" class="svz">CORE / CTRL</text>
+          <text x="16" y="352" class="svz">ACCESS / EDGE</text>
+          <!-- Internet -->
+          <g class="svbox">
+            <rect x="370" y="40" width="440" height="46"/>
+            <text x="590" y="63" class="svt">INTERNET / ISP</text>
+            <text x="590" y="79" class="svs">OUTBOUND 80 / 443 ONLY</text>
+          </g>
+          <line x1="590" y1="86" x2="590" y2="112" class="svl" marker-end="url(#arrR)"/>
+          <!-- pfSense -->
+          <g class="svbox">
+            <rect x="370" y="116" width="440" height="60" class="svedge"/>
+            <text x="590" y="141" class="svt svred">pfSense FIREWALL</text>
+            <text x="590" y="160" class="svs">NAT · IPSec / OPENVPN · DEFAULT DENY</text>
+          </g>
+          <line x1="590" y1="176" x2="590" y2="204" class="svl" marker-end="url(#arr)"/>
+          <!-- Core -->
+          <g class="svbox">
+            <rect x="370" y="208" width="440" height="60"/>
+            <text x="590" y="233" class="svt">CORE SWITCH · L3</text>
+            <text x="590" y="252" class="svs">INTER-VLAN · TRUNK 802.1Q · RPVST+</text>
+          </g>
+          <!-- side notes -->
+          <g class="svbox">
+            <rect x="130" y="216" width="212" height="46" class="svdash"/>
+            <text x="236" y="235" class="svs2">RADIUS · 802.1X</text>
+            <text x="236" y="252" class="svs2">AAA / DYNAMIC VLAN</text>
+          </g>
+          <line x1="342" y1="239" x2="368" y2="239" class="svdashl" marker-end="url(#arr)"/>
+          <g class="svbox">
+            <rect x="840" y="216" width="212" height="46" class="svdash"/>
+            <text x="946" y="235" class="svs2">SUPERVISION</text>
+            <text x="946" y="252" class="svs2">SNMP 161 · SYSLOG 514</text>
+          </g>
+          <line x1="812" y1="239" x2="838" y2="239" class="svdashl" marker-end="url(#arr)"/>
+          <!-- branches -->
+          <path d="M590 268 V304" class="svl" marker-end="url(#arr)"/>
+          <path d="M270 288 H910" class="svl"/>
+          <path d="M270 288 V304 M910 288 V304" class="svl" marker-end="url(#arr)"/>
+          <!-- Access A -->
+          <g class="svbox">
+            <rect x="120" y="304" width="300" height="86"/>
+            <text x="270" y="328" class="svt">ACCESS SW — A</text>
+            <text x="270" y="348" class="svs">VLAN 10 ADMIN · 20 FINANCE</text>
+            <text x="270" y="366" class="svs">PORT SECURITY · DHCP SNOOP</text>
+            <text x="270" y="384" class="svs2">802.1X SUPPLICANTS</text>
+          </g>
+          <!-- Access B -->
+          <g class="svbox">
+            <rect x="440" y="304" width="300" height="86"/>
+            <text x="590" y="328" class="svt">ACCESS SW — B</text>
+            <text x="590" y="348" class="svs">VLAN 30 TECH · 40 SALES</text>
+            <text x="590" y="366" class="svs">DAI · STICKY MAC</text>
+            <text x="590" y="384" class="svs2">ERR-DISABLE ON VIOLATION</text>
+          </g>
+          <!-- Servers -->
+          <g class="svbox">
+            <rect x="760" y="304" width="300" height="86" class="svedge"/>
+            <text x="910" y="328" class="svt svred">SERVER ZONE</text>
+            <text x="910" y="348" class="svs">VLAN 50 MONITOR · 99 MGMT</text>
+            <text x="910" y="366" class="svs">ZABBIX · DHCP · DNS</text>
+            <text x="910" y="384" class="svs2">ACL: SNMP FROM TECH ONLY</text>
+          </g>
+          <!-- footer note -->
+          <line x1="120" y1="420" x2="1060" y2="420" class="svdashl"/>
+          <text x="590" y="446" class="svs">DEFENSE IN DEPTH — L2 + L3 · LEAST PRIVILEGE BY DEFAULT · SUPERVISED IN REAL TIME</text>
+        </svg>
+      </figure>
+
+      <!-- tools -->
+      <div class="tools" data-reveal aria-label="Tools and technologies">
+        <span>GNS3</span><span>Cisco IOS</span><span>pfSense</span><span>Zabbix</span><span>VLAN / 802.1Q</span><span>VLSM</span><span>ACL</span><span>NAT</span><span>802.1X / RADIUS</span><span>IPSec &amp; OpenVPN</span><span>Rapid-PVST+</span><span>DHCP Snooping</span><span>DAI</span><span>SNMP · Syslog</span><span>Kali Linux</span><span>Nmap</span><span>Ettercap</span><span>Wireshark</span>
+      </div>
+
+      <!-- validation -->
+      <h3 class="sub" data-reveal>Validation — simulated attacks</h3>
+      <div class="pentest" data-reveal>
+        <div class="pentest__item"><span class="pentest__attack">Nmap port scan</span><p>from an unauthorized VLAN → all ports <b>filtered</b></p><i>■</i></div>
+        <div class="pentest__item"><span class="pentest__attack">VLAN hopping</span><p>against 802.1Q isolation → <b>blocked</b></p><i>■</i></div>
+        <div class="pentest__item"><span class="pentest__attack">ARP spoofing</span><p>(Ettercap) → rejected by Dynamic ARP Inspection</p><i>■</i></div>
+        <div class="pentest__item"><span class="pentest__attack">MAC flooding</span><p>(Macof) → port driven to <b>err-disable</b>, users unaffected</p><i>■</i></div>
+      </div>
+      <p class="measure" data-reveal>
+        Post-hardening measurements: internal RTT <b>&lt; 2 ms</b> · STP failover
+        <b>&lt; 2 s</b> · firewall &amp; monitoring CPU <b>&lt; 80%</b> under deep packet inspection.
+      </p>
+    </div>
+  </section>
+
+  <!-- ══════════════════ 07 CONTACT ══════════════════ -->
+  <section class="sec" id="contact">
+    <div class="container">
+      <div class="sechead" data-reveal>
+        <span class="sechead__num">07</span>
+        <span class="sechead__name">Contact</span>
+        <span class="sechead__rule" aria-hidden="true"></span>
+      </div>
+      <div class="contact__grid">
+        <div data-reveal>
+          <h2 class="display display--sm">Let's build something <span class="accentword">secure</span></h2>
+          <p class="contact__note">
+            Available for network setup, security audits, IT support and
+            consulting. Write below and it lands straight in my inbox.
+          </p>
+          <div class="contact__addr">
+            <span class="contact__addr-label">Direct</span>
+            <a class="contact__mail" href="mailto:adamfarrah14@gmail.com">adamfarrah14@gmail.com</a>
+            <button class="btn btn--ghost" id="copyBtn" type="button">Copy address</button>
+          </div>
+          <p class="contact__hint">Opens your mail app with everything filled in.</p>
+        </div>
+
+        <form class="form" id="contactForm" data-reveal novalidate>
+          <p class="form__head"><span>New message</span><span>to adamfarrah14@gmail.com</span></p>
+          <div class="form__pair">
+            <label>
+              <span>From</span>
+              <input type="text" name="from" autocomplete="name" required placeholder="Your name">
+            </label>
+            <label>
+              <span>Email</span>
+              <input type="email" name="email" autocomplete="email" required placeholder="you@example.com">
+            </label>
+          </div>
+          <label>
+            <span>Subject</span>
+            <input type="text" name="subject" required placeholder="Network build · audit · support · website…">
+          </label>
+          <label>
+            <span>Message</span>
+            <textarea name="message" rows="6" required placeholder="Describe your environment, your goal and any constraints."></textarea>
+          </label>
+          <p class="form__error" id="formError" role="alert" hidden>Please complete every field with a valid email.</p>
+          <button class="btn btn--solid" type="submit">Send <span aria-hidden="true">→</span></button>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ══════════════════ FOOTER ══════════════════ -->
+<footer class="foot">
+  <div class="container foot__grid">
+    <div class="foot__brand">
+      <img class="foot__logo" src="assets/logo-af.png" alt="Adem Ferrah — logo" width="528" height="528" decoding="async" fetchpriority="low">
+      <p class="foot__name">Adem Ferrah</p>
+      <p>Network Administration &amp; Security</p>
+      <ul class="foot__social" aria-label="Social profiles">
+        <li><a href="https://www.instagram.com/adamferrah__/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram"><svg class="s-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></svg></a></li>
+        <li><a href="https://github.com/adamfarrah" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub"><svg class="s-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a></li>
+        <li><a href="https://discord.com/invite/vdNBs5qt" target="_blank" rel="noopener noreferrer" aria-label="Discord" title="Discord"><svg class="s-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg></a></li>
+        <li><a href="https://steamcommunity.com/profiles/76561199563584254/" target="_blank" rel="noopener noreferrer" aria-label="Steam" title="Steam"><svg class="s-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.006l2.861-4.142V8.91c0-2.495 2.028-4.524 4.524-4.524 2.494 0 4.524 2.031 4.524 4.527s-2.03 4.525-4.524 4.525h-.105l-4.076 2.911c0 .052.004.105.004.159 0 1.875-1.515 3.396-3.39 3.396-1.635 0-3.016-1.173-3.331-2.727L.436 15.27C1.862 20.307 6.486 24 11.979 24c6.627 0 11.999-5.373 11.999-12S18.605 0 11.979 0zM7.54 18.21l-1.473-.61c.262.543.714.999 1.314 1.25 1.297.539 2.793-.076 3.332-1.375.263-.63.264-1.319.005-1.949s-.75-1.121-1.377-1.383c-.624-.26-1.29-.249-1.878-.03l1.523.63c.956.4 1.409 1.5 1.009 2.455-.397.957-1.497 1.41-2.454 1.012H7.54zm11.415-9.303c0-1.662-1.353-3.015-3.015-3.015-1.665 0-3.015 1.353-3.015 3.015 0 1.665 1.35 3.015 3.015 3.015 1.663 0 3.015-1.35 3.015-3.015zm-5.273-.005c0-1.252 1.013-2.266 2.265-2.266 1.249 0 2.266 1.014 2.266 2.266 0 1.251-1.017 2.265-2.266 2.265-1.253 0-2.265-1.014-2.265-2.265z"/></svg></a></li>
+      </ul>
+    </div>
+    <nav class="foot__links" aria-label="Footer">
+      <a href="#about">01 About</a><a href="#focus">02 Focus</a><a href="#experience">03 Experience</a><a href="#services">04 Services</a><a href="#innovation">05 AI</a><a href="#project">06 Project</a><a href="#contact">07 Contact</a>
+    </nav>
+    <div class="foot__meta">
+      <p>Set in a grotesque sans on a 12-column grid.</p>
+      <p>© <span id="year">2026</span> Adem Ferrah — <a href="#top" class="foot__top">Back to top ↑</a></p>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
